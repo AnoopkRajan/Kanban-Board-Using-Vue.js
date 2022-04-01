@@ -1,26 +1,34 @@
 <template>
-  <div class="bg-white shadow rounded px-3 pt-3 pb-5 border border-white">
-    <div class="flex justify-between">
-      <p class="text-gray-700 font-semibold font-sans tracking-wide text-sm">
+  <div>
+    <div>
+      <p>
         {{ task.title }}
       </p>
-      <div class="flex mt-4 justify-around items-center">
-        <badge v-if="task.type" :color="badgeColor">{{ task.type }}</badge>
-      </div>
+      <!-- <div class="flex mt-4 justify-around items-center"> -->
+      <badge v-if="task.type" :color="badgeColor">{{ task.type }}</badge>
+      <!-- </div> -->
 
-      <img
-        class="w-6 h-6 rounded-full ml-3"
-        src="https://pickaface.net/gallery/avatar/unr_sample_161118_2054_ynlrg.png"
-        alt="Avatar"
-      />
+      <div class="card-footer">
+        <days-indicator
+          :dotsNumber="
+            Math.floor((Date.now() - Number(task.date)) / (1000 * 60 * 60 * 24))
+          "
+        ></days-indicator>
+        <img
+          src="https://pickaface.net/gallery/avatar/unr_sample_161118_2054_ynlrg.png"
+          alt="Avatar"
+        />
+      </div>
     </div>
   </div>
 </template>
 <script>
+import DaysIndicator from "./DaysIndicator.vue";
 import Badge from "./StatusComponent.vue";
 export default {
   components: {
     Badge,
+    DaysIndicator,
   },
   props: {
     task: {
@@ -44,9 +52,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-img {
-  width: 10%;
-  height: 10%;
-  border-radius: 50%;
+.card-footer {
+  background: white;
+  border: none;
+
+  padding: 2%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    width: 10%;
+    height: 10%;
+    border-radius: 50%;
+
+    float: right;
+    margin: 0;
+  }
 }
 </style>
