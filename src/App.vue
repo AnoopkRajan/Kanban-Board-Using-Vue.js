@@ -12,7 +12,12 @@
           item-key="id"
         >
           <template #item="{ element }">
-            <task-card :task="element" class="list-group-item"></task-card>
+            <task-card
+              :task="element"
+              class="list-group-item"
+              :column="column.title"
+              @delete-task="deleteFromL4"
+            ></task-card>
           </template>
 
           <template v-if="column.title === 'Backlog'" #footer>
@@ -24,7 +29,11 @@
       </div>
     </div>
   </div>
-  <add-task v-if="addTask" @closeTrigger="addTask = false"></add-task>
+  <add-task
+    v-if="addTask"
+    @closeTrigger="addTask = false"
+    @newTaskInfo="addNewTask"
+  ></add-task>
 </template>
 
 <script>
@@ -32,6 +41,8 @@ import { columns } from "./columns";
 import draggable from "vuedraggable";
 import TaskCard from "./components/TaskCard.vue";
 import AddTask from "./components/AddTask.vue";
+
+var id = 100;
 
 export default {
   order: 14,
@@ -60,6 +71,19 @@ export default {
   methods: {
     add: function () {
       this.addTask = true;
+    },
+
+    addNewTask($newTask) {
+      $newTask.id = id++;
+      this.list.push($newTask);
+    },
+    deleteFromL4($id) {
+      for (let i = 0; i < this.list4.length; i++) {
+        if (this.list4[i].id === Number($id)) {
+          this.list4.splice(i, 1);
+          break;
+        }
+      }
     },
   },
 };

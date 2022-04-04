@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div>
-      <p>
-        {{ task.title }}
-      </p>
+    <div @click="edit()">
+      <p>{{ task.title }}</p>
       <!-- <div class="flex mt-4 justify-around items-center"> -->
       <badge v-if="task.type" :color="badgeColor">{{ task.type }}</badge>
       <!-- </div> -->
@@ -14,26 +12,56 @@
             Math.floor((Date.now() - Number(task.date)) / (1000 * 60 * 60 * 24))
           "
         ></days-indicator>
+        <button
+          v-if="column === 'Done'"
+          class="delete-btn"
+          @click.stop="deleteTask()"
+        >
+          🗑
+        </button>
         <img
           src="https://pickaface.net/gallery/avatar/unr_sample_161118_2054_ynlrg.png"
           alt="Avatar"
         />
       </div>
     </div>
+    <edit-task
+      v-if="editTask"
+      :task="task"
+      @closeTrigger="editTask = false"
+    ></edit-task>
   </div>
 </template>
 <script>
 import DaysIndicator from "./DaysIndicator.vue";
 import Badge from "./StatusComponent.vue";
+import EditTask from "./EditTask.vue";
+
 export default {
   components: {
     Badge,
     DaysIndicator,
+    EditTask,
   },
+  emits: ["delete-task"],
   props: {
     task: {
       type: Object,
       default: () => ({}),
+    },
+    column: String,
+  },
+  data() {
+    return {
+      editTask: false,
+    };
+  },
+  methods: {
+    edit() {
+      this.editTask = true;
+    },
+    deleteTask() {
+      this.$emit("delete-task", this.task.id);
     },
   },
   computed: {
@@ -61,6 +89,11 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .delete-btn {
+    border: none;
+    background: none;
+  }
 
   img {
     width: 10%;
