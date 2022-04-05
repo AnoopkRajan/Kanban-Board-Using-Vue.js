@@ -5,16 +5,16 @@
         <button class="close-btn" @click="closeModal()">❌</button>
       </div>
       <div class="task-title">
-        <h3>{{ newTask.title }}</h3>
+        <h3>{{ task.title }}</h3>
       </div>
 
       <div class="task-info">
         <h6>Title:</h6>
-        <textarea class="textarea title" v-model="newTask.title"></textarea>
+        <textarea class="textarea title" v-model="editingTask.title"></textarea>
       </div>
       <div class="task-info">
         <h6>Type:</h6>
-        <select id="types">
+        <select id="types" :value="editingTask.type">
           <option value="Design">Design</option>
           <option value="Feature Request">Feature Request</option>
           <option value="QA">QA</option>
@@ -26,13 +26,8 @@
         <h6>Description:</h6>
         <textarea
           class="textarea description"
-          v-model="newTask.desc"
+          v-model="editingTask.desc"
         ></textarea>
-      </div>
-
-      <div class="add-or-cancel">
-        <button class="cancel" @click="closeModal()">Cancel</button>
-        <button class="add" @click="addNewTask()">Add</button>
       </div>
     </div>
   </div>
@@ -40,28 +35,22 @@
 
 <script>
 export default {
-  emits: ["closeTrigger", "newTaskInfo"],
+  emits: ["closeTrigger"],
+  props: {
+    task: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   data() {
     return {
-      newTask: {
-        id: "",
-        title: "Title",
-        date: "",
-        type: "",
-        desc: "blah blah blah",
-      },
+      editingTask: this.task,
     };
   },
   methods: {
     closeModal() {
+      this.editingTask.type = document.getElementById("types").value;
       this.$emit("closeTrigger");
-    },
-    addNewTask() {
-      this.newTask.type = document.getElementById("types").value;
-      this.newTask.date = Date.now();
-
-      this.$emit("newTaskInfo", this.newTask);
-      this.closeModal();
     },
   },
 };
@@ -142,18 +131,6 @@ export default {
 
       .description {
         height: 200px;
-      }
-    }
-
-    .add-or-cancel {
-      display: flex;
-      justify-content: flex-end;
-
-      button {
-        margin-right: 40px;
-        width: 80px;
-        height: 40px;
-        border-radius: 10px;
       }
     }
   }
