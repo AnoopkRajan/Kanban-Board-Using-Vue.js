@@ -5,15 +5,17 @@ export const columns = [
       {
         id: 1,
         title: `Add discount code to checkout page`,
-        date: 1642148060000,
+        date: 1648803852000,
         type: "Feature Request",
         desc: "Discout code blah blah blah",
+        priority: "High",
       },
       {
         id: 2,
         title: `Provide documentation on integrations`,
         date: 1641975260000,
         desc: "Discout code blah blah blah",
+        priority: "Medium",
       },
       {
         id: 3,
@@ -21,6 +23,7 @@ export const columns = [
         date: 1641716060000,
         type: "Design",
         desc: "Discout code blah blah blah",
+        priority: "Low",
       },
       {
         id: 4,
@@ -28,6 +31,7 @@ export const columns = [
         date: 1642148060000,
         type: "Feature Request",
         desc: "Discout code blah blah blah",
+        priority: "High",
       },
       {
         id: 5,
@@ -35,6 +39,7 @@ export const columns = [
         date: 1642234460000,
         type: "QA",
         desc: "Discout code blah blah blah",
+        priority: "Low",
       },
     ],
   },
@@ -47,6 +52,7 @@ export const columns = [
         date: 1644394460000,
         type: "Design",
         desc: "Discout code blah blah blah",
+        priority: "Low",
       },
       {
         id: 7,
@@ -54,6 +60,7 @@ export const columns = [
         date: 1644826460000,
         type: "Feature Request",
         desc: "Discout code blah blah blah",
+        priority: "Medium",
       },
       {
         id: 8,
@@ -61,6 +68,7 @@ export const columns = [
         date: 1644653660000,
         type: "Backend",
         desc: "Discout code blah blah blah",
+        priority: "High",
       },
     ],
   },
@@ -73,6 +81,7 @@ export const columns = [
         date: 1644394460000,
         type: "Design",
         desc: "Discout code blah blah blah",
+        priority: "High",
       },
       {
         id: 18,
@@ -80,6 +89,7 @@ export const columns = [
         date: 1647245660000,
         type: "Feature Request",
         desc: "Discout code blah blah blah",
+        priority: "High",
       },
       {
         id: 19,
@@ -87,6 +97,7 @@ export const columns = [
         date: 1647072860000,
         type: "Backend",
         desc: "Discout code blah blah blah",
+        priority: "Low",
       },
     ],
   },
@@ -98,6 +109,7 @@ export const columns = [
         title: `Provide documentation on integrations`,
         date: 1647850460000,
         desc: "Discout code blah blah blah",
+        priority: "Meidum",
       },
       {
         id: 10,
@@ -105,6 +117,7 @@ export const columns = [
         date: 1646813660000,
         type: "Design",
         desc: "Discout code blah blah blah",
+        priority: "High",
       },
       {
         id: 11,
@@ -112,6 +125,7 @@ export const columns = [
         date: 1647245660000,
         type: "Feature Request",
         desc: "Discout code blah blah blah",
+        priority: "Low",
       },
       {
         id: 12,
@@ -119,6 +133,7 @@ export const columns = [
         date: 1646813660000,
         type: "Design",
         desc: "Discout code blah blah blah",
+        priority: "Medium",
       },
       {
         id: 13,
@@ -126,6 +141,7 @@ export const columns = [
         date: 1647245660000,
         type: "Feature Request",
         desc: "Discout code blah blah blah",
+        priority: "High",
       },
     ],
   },
@@ -138,6 +154,7 @@ export const columns = [
         date: 1644826460000,
         type: "Feature Request",
         desc: "Discout code blah blah blah",
+        priority: "High",
       },
       {
         id: 15,
@@ -145,6 +162,7 @@ export const columns = [
         date: 1641716060000,
         type: "Design",
         desc: "Discout code blah blah blah",
+        priority: "Low",
       },
       {
         id: 16,
@@ -152,6 +170,7 @@ export const columns = [
         date: 1647245660000,
         type: "Feature Request",
         desc: "Discout code blah blah blah",
+        priority: "Medium",
       },
     ],
   },

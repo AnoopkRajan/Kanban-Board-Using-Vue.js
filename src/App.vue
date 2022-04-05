@@ -11,19 +11,19 @@
           group="a"
           item-key="id"
         >
+          <template v-if="column.title === 'Backlog'" #header>
+            <div class="add-btn" role="group">
+              <button @click="add">﹢</button>
+            </div>
+          </template>
           <template #item="{ element }">
             <task-card
               :task="element"
               class="list-group-item"
               :column="column.title"
               @delete-task="deleteFromL4"
+              @change-column="changeColumn"
             ></task-card>
-          </template>
-
-          <template v-if="column.title === 'Backlog'" #footer>
-            <div class="btn-group add-btn" role="group">
-              <button class="btn btn-secondary" @click="add">Add</button>
-            </div>
           </template>
         </draggable>
       </div>
@@ -66,6 +66,13 @@ export default {
       list2: columns[2].tasks,
       list3: columns[3].tasks,
       list4: columns[4].tasks,
+      columnToIndex: {
+        Backlog: 0,
+        "In Progress": 1,
+        Blocked: 2,
+        Review: 3,
+        Done: 4,
+      },
     };
   },
   methods: {
@@ -85,6 +92,29 @@ export default {
         }
       }
     },
+    changeColumn($passedInfo) {
+      let previousColumn = $passedInfo[0];
+      let newColumn = $passedInfo[1];
+      let taskId = $passedInfo[2];
+      let taskData = {};
+
+      for (
+        let i = 0;
+        i < this.columns[this.columnToIndex[previousColumn]].tasks.length;
+        i++
+      ) {
+        if (
+          this.columns[this.columnToIndex[previousColumn]].tasks[i].id ===
+          taskId
+        ) {
+          taskData = this.columns[this.columnToIndex[previousColumn]].tasks[i];
+          this.columns[this.columnToIndex[previousColumn]].tasks.splice(i, 1);
+          break;
+        }
+      }
+
+      this.columns[this.columnToIndex[newColumn]].tasks.push(taskData);
+    },
   },
 };
 </script>
@@ -93,7 +123,6 @@ export default {
 .main-wrapper {
   display: flex;
   z-index: 2;
-  // margin: 5px auto;
 
   .sections {
     flex-basis: 50%;
@@ -128,6 +157,15 @@ export default {
   }
   .add-btn {
     margin-left: 10px;
+    transform: translate(4%, -25px);
+    position: absolute;
+    z-index: 10;
+
+    button {
+      border: none;
+      background: #888;
+      border-radius: 5px;
+    }
   }
 }
 </style>
