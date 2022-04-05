@@ -63,8 +63,8 @@ export default {
 <style lang="scss" scoped>
 $lightgrey: rgb(230, 230, 230);
 $grey: rgb(207, 207, 207);
-$yellow: yellow;
-$orange: orange;
+$yellow: #ffc400;
+$orange: #ff8f73;
 
 $circle-size: 5px;
 

@@ -13,14 +13,27 @@
         <textarea class="textarea title" v-model="newTask.title"></textarea>
       </div>
       <div class="task-info">
-        <h6>Type:</h6>
-        <select id="types">
-          <option value="Design">Design</option>
-          <option value="Feature Request">Feature Request</option>
-          <option value="QA">QA</option>
-          <option value="Backend">Backend</option>
-          <option value="default">Other</option>
-        </select>
+        <div class="type-priority">
+          <div class="type">
+            <h6>Type:</h6>
+            <select id="types">
+              <option value="Design">Design</option>
+              <option value="Feature Request">Feature Request</option>
+              <option value="QA">QA</option>
+              <option value="Backend">Backend</option>
+              <option value="default">Other</option>
+            </select>
+          </div>
+          <div class="priority">
+            <h6>Priority:</h6>
+            <select id="priority">
+              <option value="default">Select</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+        </div>
       </div>
       <div class="task-info">
         <h6>Description:</h6>
@@ -94,7 +107,6 @@ export default {
         float: right;
         margin-top: 5px;
         margin-right: 40px;
-        // border: none;
         background: none;
       }
     }
@@ -122,8 +134,12 @@ export default {
       justify-content: left;
       // align-items: center;
 
-      select {
-        width: 15%;
+      .type-priority {
+        display: flex;
+
+        .type {
+          margin-right: 50px;
+        }
       }
 
       .textarea {

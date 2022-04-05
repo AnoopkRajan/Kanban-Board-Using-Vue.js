@@ -28,7 +28,8 @@
     <edit-task
       v-if="editTask"
       :task="task"
-      @closeTrigger="editTask = false"
+      @closeTrigger="closedModal"
+      :column="column"
     ></edit-task>
   </div>
 </template>
@@ -43,7 +44,7 @@ export default {
     DaysIndicator,
     EditTask,
   },
-  emits: ["delete-task"],
+  emits: ["delete-task", "change-column"],
   props: {
     task: {
       type: Object,
@@ -62,6 +63,13 @@ export default {
     },
     deleteTask() {
       this.$emit("delete-task", this.task.id);
+    },
+    closedModal($newColumn) {
+      this.editTask = false;
+
+      if ($newColumn !== this.column) {
+        this.$emit("change-column", [this.column, $newColumn, this.task.id]);
+      }
     },
   },
   computed: {
