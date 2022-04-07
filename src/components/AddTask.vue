@@ -27,7 +27,7 @@
           <div class="priority">
             <h6>Priority:</h6>
             <select id="priority">
-              <option value="default">Select</option>
+              <option value="Low">Select</option>
               <option value="High">High</option>
               <option value="Medium">Medium</option>
               <option value="Low">Low</option>
@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   emits: ["closeTrigger", "newTaskInfo"],
   data() {
@@ -62,6 +64,9 @@ export default {
         date: "",
         type: "",
         desc: "blah blah blah",
+        priority: "",
+        image: "",
+        name: "",
       },
     };
   },
@@ -71,10 +76,21 @@ export default {
     },
     addNewTask() {
       this.newTask.type = document.getElementById("types").value;
+      this.newTask.priority = document.getElementById("priority").value;
       this.newTask.date = Date.now();
+      this.getRandomUser();
 
       this.$emit("newTaskInfo", this.newTask);
       this.closeModal();
+    },
+    getRandomUser: async function () {
+      try {
+        const response = await axios.get("https://randomuser.me/api/");
+        this.newTask.image = response.data.results[0].picture.thumbnail;
+        this.newTask.name = `${response.data.results[0].name.first} ${response.data.results[0].name.last}`;
+      } catch (err) {
+        console.log("error: ", err);
+      }
     },
   },
 };
