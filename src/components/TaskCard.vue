@@ -7,11 +7,36 @@
       <!-- </div> -->
 
       <div class="card-footer">
-        <days-indicator
-          :dotsNumber="
-            Math.floor((Date.now() - Number(task.date)) / (1000 * 60 * 60 * 24))
-          "
-        ></days-indicator>
+        <div class="days-priority">
+          <div class="priority">
+            <img
+              v-if="task.priority === 'High'"
+              class="status"
+              src="@/assets/Icons/high-p.png"
+              alt="High priority status icon"
+            />
+            <img
+              v-if="task.priority === 'Medium'"
+              class="status"
+              src="@/assets/Icons/medium-p.png"
+              alt="Medium priority status icon"
+            />
+            <img
+              v-if="task.priority === 'Low'"
+              class="status"
+              src="@/assets/Icons/low-p.png"
+              alt="Low priority status icon"
+            />
+          </div>
+          <days-indicator
+            class="days"
+            :dotsNumber="
+              Math.floor(
+                (Date.now() - Number(task.date)) / (1000 * 60 * 60 * 24)
+              )
+            "
+          ></days-indicator>
+        </div>
         <button
           v-if="column === 'Done'"
           class="delete-btn"
@@ -19,10 +44,8 @@
         >
           🗑
         </button>
-        <img
-          src="https://pickaface.net/gallery/avatar/unr_sample_161118_2054_ynlrg.png"
-          alt="Avatar"
-        />
+        <!-- <img class="avatar" :src="getRandomUser()" alt="Avatar" /> -->
+        <img class="avatar" :src="task.image" alt="Avatar" />
       </div>
     </div>
     <edit-task
@@ -54,6 +77,9 @@ export default {
   },
   data() {
     return {
+      // image:
+      //   "https://pickaface.net/gallery/avatar/unr_sample_161118_2054_ynlrg.png",
+      image: "https://randomuser.me/api/portraits/thumb/men/41.jpg",
       editTask: false,
     };
   },
@@ -98,12 +124,28 @@ export default {
   justify-content: space-between;
   align-items: center;
 
+  .days-priority {
+    display: flex;
+    // justify-content: space-around;
+    align-items: center;
+    max-width: 80px;
+
+    .priority {
+      flex-basis: 20%;
+
+      .status {
+        width: 80%;
+        height: 80%;
+      }
+    }
+  }
+
   .delete-btn {
     border: none;
     background: none;
   }
 
-  img {
+  .avatar {
     width: 10%;
     height: 10%;
     border-radius: 50%;

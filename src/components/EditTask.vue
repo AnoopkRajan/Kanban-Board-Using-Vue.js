@@ -48,7 +48,18 @@
           </div>
           <div class="info-content">
             <h6>Priority:</h6>
-            <p>{{ task.priority }}</p>
+            <select id="priority" :value="editingTask.priority">
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+          <div class="info-content opened">
+            <h6>Opened by:</h6>
+            <div class="user-details">
+              <img style="border-radius: 50%" :src="task.image" alt="Avatar" />
+              <p>{{ task.name }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -74,6 +85,7 @@ export default {
   methods: {
     closeModal() {
       this.editingTask.type = document.getElementById("types").value;
+      this.editingTask.priority = document.getElementById("priority").value;
       let newColumn = document.getElementById("status").value;
       this.$emit("closeTrigger", newColumn);
     },
@@ -189,6 +201,22 @@ export default {
 
         select {
           width: 45%;
+        }
+      }
+
+      .opened {
+        margin-top: 30px;
+        align-items: center;
+
+        .user-details {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          img {
+            width: 40px;
+            height: 40px;
+          }
         }
       }
     }

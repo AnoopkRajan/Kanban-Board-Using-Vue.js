@@ -10,6 +10,7 @@
           class="list-group"
           group="a"
           item-key="id"
+          @change="changeDate"
         >
           <template v-if="column.title === 'Backlog'" #header>
             <div class="add-btn" role="group">
@@ -114,6 +115,10 @@ export default {
       }
 
       this.columns[this.columnToIndex[newColumn]].tasks.push(taskData);
+    },
+    changeDate({ added }) {
+      let newOne = added;
+      if (added) newOne.element.date = Date.now();
     },
   },
 };
