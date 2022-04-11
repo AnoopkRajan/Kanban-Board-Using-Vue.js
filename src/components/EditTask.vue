@@ -23,7 +23,7 @@
 
           <div class="info-content">
             <h6>Created On:</h6>
-            <p>{{ String(Date(task.date)).slice(4, 15) }}</p>
+            <p>{{ String(new Date(task.date)).slice(4, 15) }}</p>
           </div>
 
           <div class="info-content">
